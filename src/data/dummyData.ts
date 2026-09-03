@@ -75,6 +75,7 @@ export const PEER_COMPANIES = [
 ];
 
 export const FISCAL_YEARS = ['FY21', 'FY22', 'FY23', 'FY24', 'FY25', 'FY26', 'FY27E', 'FY28E'];
+export const QUARTERS = ['Q1', 'Q2', 'Q3', 'Q4'];
 export const BRIDGE_PERIODS = ['FY26 Q4', 'FY26 Q3', 'FY26 Q2', 'FY26 Q1'];
 export const FORECAST_PERIODS = ['1 Year Forward (1YF)', '2 Year Forward (2YF)'];
 
