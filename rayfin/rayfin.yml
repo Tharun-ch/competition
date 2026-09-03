@@ -1,5 +1,5 @@
-id: competitive-analysis
-name: Competitive Analysis
+id: app-123
+name: App_123
 version: 1.0.0
 services:
   auth:
@@ -10,6 +10,8 @@ services:
       enabled: true
     allowedRedirectUris:
       - http://localhost:5173
+      - http://127.0.0.1:5173
+      - https://solid-rowan-4fdf9b5fb6-southeastasia.webapp.fabricapps.net
   data:
     enabled: true
     dialect: mssql
@@ -18,3 +20,7 @@ services:
     folder: dist
     buildCommand: npm run build:fabric
     indexDocument: index.html
+  storage:
+    enabled: false
+  functions:
+    enabled: false
