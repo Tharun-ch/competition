@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 
-import { BRIDGE_PERIODS, EBITDA_BRIDGE, PEER_COMPANIES } from '@/data/dummyData';
+import { EBITDA_BRIDGE, FISCAL_YEARS, PEER_COMPANIES } from '@/data/dummyData';
 
-const POSITIVE_COLOR = '#2E7D32';
-const NEGATIVE_COLOR = '#C62828';
+const TOTAL_COLOR = '#5038A0';
+const POSITIVE_COLOR = '#E0F0D8';
+const NEGATIVE_COLOR = '#F8D8C0';
 
 /**
  * Walks the steps left-to-right, tracking a running total. `total` steps
@@ -17,7 +18,8 @@ function useBridgeBars() {
     return EBITDA_BRIDGE.steps.map((step) => {
       let bottom: number;
       let height: number;
-      let color = EBITDA_BRIDGE.barColor;
+      let color = TOTAL_COLOR;
+      let textClass = 'text-white';
 
       if (step.type === 'total') {
         running = step.value;
@@ -28,6 +30,7 @@ function useBridgeBars() {
         bottom = Math.min(running, next);
         height = Math.abs(step.value);
         color = step.value >= 0 ? POSITIVE_COLOR : NEGATIVE_COLOR;
+        textClass = 'text-[#484848]';
         running = next;
       }
 
@@ -36,6 +39,7 @@ function useBridgeBars() {
         bottomPct: (bottom / EBITDA_BRIDGE.scaleMax) * 100,
         heightPct: (height / EBITDA_BRIDGE.scaleMax) * 100,
         color,
+        textClass,
       };
     });
   }, []);
@@ -70,7 +74,7 @@ function SelectBox({
 
 export function BridgeChart() {
   const [peer, setPeer] = useState(EBITDA_BRIDGE.defaultPeer);
-  const [period, setPeriod] = useState(EBITDA_BRIDGE.defaultPeriod);
+  const [year, setYear] = useState(EBITDA_BRIDGE.defaultYear);
   const bars = useBridgeBars();
   const first = bars[0];
   const last = bars[bars.length - 1];
@@ -85,7 +89,7 @@ export function BridgeChart() {
             <div key={bar.label} className="flex flex-1 flex-col">
               <div className="relative h-80 rounded bg-[#F0F0EE]">
                 <div
-                  className="absolute inset-x-0 flex items-center justify-center whitespace-nowrap rounded px-1 text-[13px] font-semibold text-white"
+                  className={`absolute inset-x-0 flex items-center justify-center whitespace-nowrap rounded px-1 text-[13px] font-semibold ${bar.textClass}`}
                   style={{
                     bottom: `${bar.bottomPct}%`,
                     height: `${bar.heightPct}%`,
@@ -101,13 +105,13 @@ export function BridgeChart() {
                 {bar === first && (
                   <>
                     <SelectBox value={peer} onChange={setPeer} options={PEER_COMPANIES} />
-                    <SelectBox value={period} onChange={setPeriod} options={BRIDGE_PERIODS} />
+                    <SelectBox value={year} onChange={setYear} options={FISCAL_YEARS} />
                   </>
                 )}
                 {bar === last && (
                   <>
                     <SelectBox value="DRL EBITDA" options={['DRL EBITDA']} disabled />
-                    <SelectBox value={period} options={[period]} disabled />
+                    <SelectBox value={year} options={[year]} disabled />
                   </>
                 )}
                 {bar !== first && bar !== last && (

@@ -10,6 +10,9 @@ services:
       enabled: true
     allowedRedirectUris:
       - http://localhost:5173
+      - http://localhost:5174
+      - http://127.0.0.1:5174
+      - https://rich-finch-6c76971cf3-centralindia.webapp.fabricapps.net
   data:
     enabled: true
     dialect: mssql
@@ -18,3 +21,7 @@ services:
     folder: dist
     buildCommand: npm run build:fabric
     indexDocument: index.html
+  storage:
+    enabled: false
+  functions:
+    enabled: false

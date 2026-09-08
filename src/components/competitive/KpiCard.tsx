@@ -12,6 +12,7 @@ export function KpiCard({ label, value, sub }: Kpi) {
 
 const LG_COLS_CLASS = {
   3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
   5: 'lg:grid-cols-5',
 } as const;
 

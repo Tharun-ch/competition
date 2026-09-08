@@ -15,7 +15,8 @@ export function TopBar({
         <h1 className="text-[19px] font-bold text-gray-900">
           {APP_META.title}{' '}
           <span className="ml-2 align-middle text-[11px] font-medium uppercase tracking-wide text-gray-400">
-            {APP_META.badge}
+            {APP_META.sourceLabel} <span className="font-semibold text-gray-500">{APP_META.source}</span> |{' '}
+            {APP_META.naNote}
           </span>
         </h1>
         <PeriodDropdown />
@@ -30,7 +31,7 @@ export function TopBar({
               type="button"
               onClick={() => onChangeTab(tab)}
               className={`whitespace-nowrap border-b-2 pb-3 text-[13px] font-medium transition-colors ${
-                active ? 'border-[#4C3A9E] text-[#4C3A9E]' : 'border-transparent text-[#8A8A85] hover:text-gray-700'
+                active ? 'border-[#5038A0] text-[#5038A0]' : 'border-transparent text-[#8A8A85] hover:text-gray-700'
               }`}
             >
               {tab}
